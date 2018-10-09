@@ -9,7 +9,7 @@ class Nav extends Component{
         }
 
         return (
-            <nav style={navStyle} className="purple lighten-3">
+            <nav style={navStyle} className="teal lighten-3">
                 <div className="nav-wrapper">
                     <Link className='brand-logo' to='/'>Movie Quotes</Link>
                     <ul className="right">
