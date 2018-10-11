@@ -7,12 +7,11 @@ import {signup} from '../actions';
 
 class SignUp extends Component{
     userSignUp = (values) => {
-        console.log('user sign up info', values);
         this.props.signup(values);
 
     };
     render(){
-        const {handleSubmit} = this.props;
+        const {handleSubmit, authError} = this.props;
 
         return (
             <div>
@@ -24,6 +23,7 @@ class SignUp extends Component{
                     <div className="row">
                         <div className="col s12 right-align">
                             <button className='btn blue lighten-3'>Sign Up</button>
+                            <p className="red-text text-darken-2">{authError}</p>
                         </div>
                     </div>
                 </form> 
@@ -55,6 +55,12 @@ SignUp =  reduxForm({
     validate: validate
 })(SignUp);
 
-export default connect(null, {
+function mapStateToProps(state){
+    return{
+        authError: state.user.signUpError
+    }
+};
+
+export default connect(mapStateToProps, {
     signup: signup
 })(SignUp)

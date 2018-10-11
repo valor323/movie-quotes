@@ -1,7 +1,40 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {signOut} from '../actions';
 
 class Nav extends Component{
+    renderLinks(){
+        const {auth} = this.props;
+
+        if(auth){
+            return (
+                <Fragment>
+                    <li>
+                        <Link to='/secret-list'>Secret List</Link>
+                    </li>
+                    <li>
+                        <Link to='/movie-quote'>Movie Quote</Link>
+                    </li>
+                    <li>
+                        <button onClick={this.props.signOut} className='btn red darken-2'>Sign Out</button>
+                    </li>
+                </Fragment>
+            )
+        }
+
+        return (
+            <Fragment>
+                <li>
+                    <Link to='/sign-in'>Sign In</Link>
+                </li>
+                <li>
+                    <Link to='/sign-up'>Sign Up</Link>
+                </li>
+            </Fragment>
+        )
+    }
+
     render(){
 
         const navStyle = {
@@ -22,18 +55,7 @@ class Nav extends Component{
                         <li>
                             <Link to='/person-list'>Person List</Link>
                         </li>
-                        <li>
-                            <Link to='/secret-list'>Secret List</Link>
-                        </li>
-                        <li>
-                            <Link to='/movie-quote'>Movie Quote</Link>
-                        </li>
-                        <li>
-                            <Link to='/sign-in'>Sign In</Link>
-                        </li>
-                        <li>
-                            <Link to='/sign-up'>Sign Up</Link>
-                        </li>
+                        {this.renderLinks()}
                     </ul>
                 </div>
             </nav>
@@ -41,4 +63,12 @@ class Nav extends Component{
     }
 };
 
-export default Nav;
+function mapStateToProps(state){
+    return {
+        auth: state.user.auth
+    }
+};
+
+export default connect(mapStateToProps, {
+    signOut: signOut
+})(Nav);
