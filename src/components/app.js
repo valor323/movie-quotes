@@ -9,6 +9,7 @@ import Nav from './nav';
 import SignIn from './sign_in';
 import SignUp from './sign_up';
 import {secret, people} from '../data/lists';
+import auth from '../hoc/auth';
 
 const App = () => (
     <div>
@@ -20,8 +21,8 @@ const App = () => (
             <Route path="/person-list" render={
                 props => <List {...props} title="List Of People" list={people}/>
                 }/>
-            <Route path="/secret-list" render={
-                props => <List {...props} title="Secret Operatives List" list={secret} />
+            <Route path="/secret-list" component={
+                auth(props => <List {...props} title="Secret Operatives List" list={secret} />)
                 }/>
             <Route path="/sign-in" component={SignIn}/>
             <Route path="/sign-up" component={SignUp}/>
