@@ -7,7 +7,6 @@ import {signIn} from '../actions';
 
 class SignIn extends Component{
     userSignIn = (values) => {
-        console.log('user sign In info', values);
         this.props.signIn(values);
 
     };

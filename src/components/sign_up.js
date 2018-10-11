@@ -7,7 +7,6 @@ import {signup} from '../actions';
 
 class SignUp extends Component{
     userSignUp = (values) => {
-        console.log('user sign up info', values);
         this.props.signup(values);
 
     };
